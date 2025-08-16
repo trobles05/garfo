@@ -1,0 +1,70 @@
+/* =================================================================== */
+/* ESTILOS PARA OPÇÕES DENTRO DOS MODAIS (PORÇÕES E MARMITAS)        */
+/* =================================================================== */
+
+/* Estilo para cada item de opção dentro do modal */
+#portion-options-container .option-item,
+#meal-options-container .option-item {
+  margin-bottom: 12px;
+}
+
+/* Estilo para a etiqueta (label) que funciona como um card clicável */
+#portion-options-container label,
+#meal-options-container label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Esconde o botão de rádio padrão, pois a etiqueta já é clicável */
+#portion-options-container input[type="radio"],
+#meal-options-container input[type="radio"] {
+  display: none;
+}
+
+/* Muda a aparência da etiqueta quando a opção está selecionada */
+#portion-options-container input[type="radio"]:checked + label,
+#meal-options-container input[type="radio"]:checked + label {
+  border-color: #3b82f6; /* Borda azul para indicar seleção */
+  background-color: #eff6ff; /* Fundo azul bem claro */
+}
+
+/* Estilo para o nome/tamanho da opção */
+#portion-options-container .option-size,
+#meal-options-container .option-size {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilo para o preço da opção */
+#portion-options-container .option-price,
+#meal-options-container .option-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #16a34a; /* Verde */
+}
+
+/* Estilo para o botão "Adicionar ao carrinho" no rodapé dos modais */
+#add-portion-to-cart-btn,
+#add-meal-to-cart-btn {
+  background-color: #22c55e; /* Verde */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#add-portion-to-cart-btn:hover,
+#add-meal-to-cart-btn:hover {
+  background-color: #16a34a;
+}

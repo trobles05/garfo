@@ -1,0 +1,103 @@
+/* =============================================== */
+/* ESTILOS PARA A SEÇÃO DE BEBIDAS                 */
+/* =============================================== */
+
+.bebidas-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 48px auto 32px auto;
+  padding: 40px 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bebidas-section h2 {
+  text-align: left;
+  font-size: 2.2rem;
+  color: var(--cor-hover, #ffd700);
+  margin-bottom: 46px;
+  font-weight: 700;
+  text-shadow: 1px 1px 6px #18181b;
+}
+
+.bebida-grid {
+  display: grid;
+  /* 3 colunas para desktop */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.bebida-item {
+  background: var(--cor-texto, #ffffff); /* Cor de fundo do card */
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(24, 24, 27, 0.1);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
+  text-align: center; /* Centraliza o texto */
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(24, 24, 27, 0.07);
+}
+
+.bebida-item:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.bebida-item img {
+  width: 100%;
+  max-width: 200px; /* Controla o tamanho da imagem */
+  height: 120px;
+  object-fit: cover; /* Garante que a imagem preencha o espaço */
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.bebida-item h1 {
+  font-size: 1.2rem;
+  color: #18181b;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.bebida-item p {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  flex-grow: 1; /* Garante que os botões fiquem alinhados na base */
+}
+
+.bebida-item button {
+  background: var(--cor-hover, #ffd700);
+  color: #18181b;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: auto; /* Empurra o botão para o final do card */
+}
+
+.bebida-item button:hover {
+  background: #e6c200;
+}
+
+/* Ajustes para telas menores (Responsividade) */
+@media (max-width: 992px) {
+  .bebida-grid {
+    /* 2 colunas para tablets */
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .bebidas-section {
+    padding: 24px 4px;
+  }
+  .bebida-grid {
+    /* 1 coluna para celulares */
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,69 @@
+/* =============================================== */
+/* ESTILOS PARA O MODAL DE BEBIDAS                 */
+/* =============================================== */
+
+/* Corpo do modal de bebidas, permite scroll */
+#drink-options-container {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Estilo para cada item de opção (cada bebida) */
+#drink-options-container .option-item {
+  margin-bottom: 12px;
+}
+
+/* Estilo para a etiqueta (label) que funciona como um card clicável */
+#drink-options-container label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Esconde o botão de rádio padrão */
+#drink-options-container input[type="radio"] {
+  display: none;
+}
+
+/* Muda a aparência da etiqueta quando a opção está selecionada */
+#drink-options-container input[type="radio"]:checked + label {
+  border-color: #3b82f6; /* Borda azul para indicar seleção */
+  background-color: #eff6ff; /* Fundo azul bem claro */
+}
+
+/* Estilo para o nome da bebida */
+#drink-options-container .option-size {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilo para o preço da bebida */
+#drink-options-container .option-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #16a34a; /* Verde */
+}
+
+/* Estilo para o botão "Adicionar ao carrinho" no rodapé do modal */
+#add-drink-to-cart-btn {
+  background-color: #22c55e; /* Verde */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#add-drink-to-cart-btn:hover {
+  background-color: #16a34a;
+}

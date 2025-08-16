@@ -1,0 +1,57 @@
+/* =================================================================== */
+/* ESTILOS PARA OS BOTÕES DENTRO DO MODAL DE PORÇÕES                 */
+/* =================================================================== */
+
+/* Container para as opções de tamanho (Meia/Inteira) */
+.portion-size-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+/* Esconde o input de rádio original */
+.portion-size-options input[type="radio"] {
+  display: none;
+}
+
+/* Estilo da etiqueta que funciona como um botão */
+.portion-size-options label {
+  padding: 8px 12px;
+  border: 2px solid #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+/* Estilo da etiqueta quando o rádio correspondente está selecionado */
+.portion-size-options input[type="radio"]:checked + label {
+  border-color: #3b82f6; /* Borda azul */
+  background-color: #eff6ff; /* Fundo azul claro */
+  color: #2563eb;
+  font-weight: bold;
+}
+
+/* Estilo para o botão 'Adicionar' de cada porção */
+.add-portion-option-btn {
+  background-color: #3b82f6; /* Azul, para combinar com o resto */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%; /* Ocupa toda a largura do container */
+  transition: background-color 0.2s;
+}
+
+.add-portion-option-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Estilo para o botão quando estiver desabilitado */
+.add-portion-option-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

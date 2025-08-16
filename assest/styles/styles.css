@@ -1,0 +1,36 @@
+@import url(./menuPricipal/header.css);
+@import url(./menuPricipal/garfoVIdeo.css);
+@import url(./menuPricipal/mais-vendidos.css);
+@import url(./menuPricipal/pizza.css);
+@import url(./menuPricipal/porcoes-ouro.css);
+@import url(./menuPricipal/marmitas.css);
+@import url(./menuPricipal/lanches.css);
+@import url(./menuPricipal/bebidas.css);
+@import url(./menuPricipal/cartModal.css);
+@import url(./menuPricipal/footer.css);
+@import url(./menuPricipal/cartModalPizza.css);
+@import url(./menuPricipal/cartModalPorca.css);
+@import url(./menuPricipal/cartModalMarmita.css);
+@import url(./menuPricipal/cartModalLanches.css);
+@import url(./menuPricipal/cartModalBebidas.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --cor-titulo: #f0c850;
+  --cor-destaque: #b4322d;
+  --cor-destaque-fechado: #43c51b;
+  --cor-destaque-aberto: #b4322d;
+  --cor-texto: #828282;
+  --cor-fundo: #2b2a2a;
+  --cor-fundo-opaco: rgb(18, 18, 18, 0.9);
+  --cor-hover: #ffbe3c;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}

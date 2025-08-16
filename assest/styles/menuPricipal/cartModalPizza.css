@@ -1,0 +1,194 @@
+.modal {
+  display: none; /* Começa escondido por padrão */
+  position: fixed; /* Fica fixo na tela, mesmo com scroll */
+  z-index: 99; /* Garante que fique acima de todo o resto */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Permite scroll se o conteúdo for maior que a tela */
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Classe que será adicionada via JS para mostrar o modal */
+.modal.active {
+  display: flex;
+}
+
+/* Conteúdo principal do Modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 64px auto;
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%; /* Responsivo, ocupa 90% da largura da tela */
+  max-width: 600px; /* Mas não passa de 600px em telas grandes */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espaçamento entre header, body e footer */
+  animation: slide-down 0.3s ease-out; /* Animação de entrada */
+}
+
+/* Animação para o modal aparecer de cima para baixo */
+@keyframes slide-down {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Cabeçalho do Modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 16px;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem; /* 24px */
+  margin: 0;
+  color: #333;
+}
+
+/* Botão de Fechar (X) */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem; /* 32px */
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Corpo do Modal (onde ficam os sabores) */
+.modal-body {
+  max-height: 50vh; /* Altura máxima, para não ocupar a tela toda */
+  overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
+  padding-right: 10px; /* Espaço para a barra de rolagem não colar no conteúdo */
+}
+
+/* Item de Sabor Individual */
+.flavor-item {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Espaço entre a imagem e os detalhes */
+  padding: 12px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.flavor-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover; /* Garante que a imagem não distorça */
+}
+
+.flavor-details {
+  flex-grow: 1; /* Faz essa div ocupar o espaço restante */
+}
+
+.flavor-details h4 {
+  font-size: 1.1rem;
+  margin: 0 0 4px 0;
+  color: #222;
+}
+
+.flavor-details p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #666;
+}
+
+.flavor-price-action {
+  text-align: right;
+}
+
+.flavor-price-action span {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.select-flavor-btn {
+  background-color: #3b82f6; /* Azul */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.select-flavor-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Estilo para o item de sabor QUANDO SELECIONADO */
+.flavor-item.selected {
+  border-color: #3b82f6; /* Borda azul para indicar seleção */
+  background-color: #eff6ff; /* Fundo azul bem claro */
+}
+
+.flavor-item.selected .select-flavor-btn {
+  background-color: #ef4444; /* Botão fica vermelho (Cancelar) */
+}
+
+.flavor-item.selected .select-flavor-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Rodapé do Modal */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+}
+
+.modal-footer p {
+  margin: 0;
+  font-weight: 500;
+  color: #555;
+}
+
+#add-pizza-to-cart-btn {
+  background-color: #22c55e; /* Verde */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#add-pizza-to-cart-btn:hover {
+  background-color: #16a34a;
+}
+
+/* Estilo para o botão quando estiver desabilitado */
+#add-pizza-to-cart-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

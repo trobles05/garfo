@@ -1,0 +1,44 @@
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: var(--cor-destaque, #e63946);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  z-index: 10000;
+  box-shadow: 0 -2px 16px rgba(24, 24, 27, 0.1);
+}
+
+footer .cart-btn {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+footer .cart-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #ffd700;
+}
+
+footer .cart-btn .cart-btn-icon {
+  font-size: 1.5rem;
+  margin-left: 8px;
+}
+
+@media (max-width: 600px) {
+  footer .cart-btn {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}

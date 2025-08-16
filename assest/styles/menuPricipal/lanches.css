@@ -1,0 +1,122 @@
+.lanches-normais {
+  width: 100%;
+  max-width: 1200px;
+  margin: 48px auto 0 auto;
+  padding: 40px 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lanches-normais h2 {
+  text-align: left;
+  font-size: 2.2rem;
+  color: var(--cor-hover, #ffd700);
+  margin-bottom: 46px;
+  font-weight: 700;
+  text-shadow: 1px 1px 6px #18181b;
+}
+
+.lanche-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.lanche-item {
+  background: var(--cor-texto);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(24, 24, 27, 0.1);
+  padding: 24px 16px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(24, 24, 27, 0.07);
+}
+
+.lanche-item:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.lanche-item img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 0;
+  background: #f8f8f8;
+  grid-row: 1 / span 4;
+  grid-column: 1;
+}
+
+.lanche-item h3,
+.lanche-item p,
+.lanche-item .lanche-price,
+.lanche-item button {
+  grid-column: 2;
+  text-align: left;
+}
+
+.lanche-item h1 {
+  font-size: 1.2rem;
+  color: #18181b;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.lanche-item p {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.lanche-item .lanche-price {
+  color: var(--cor-hover, #ffd700);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.lanche-item button {
+  background: var(--cor-hover, #ffd700);
+  color: #18181b;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.lanche-item button:hover {
+  background: #e6c200;
+}
+
+@media (max-width: 768px) {
+  .lanche-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .lanches-normais {
+    padding: 24px 4px;
+  }
+  .lanche-item {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    text-align: center;
+  }
+  .lanche-item img {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0 auto 12px auto;
+  }
+  .lanche-item h1,
+  .lanche-item p,
+  .lanche-item .lanche-price,
+  .lanche-item button {
+    grid-column: 1;
+    text-align: center;
+  }
+}

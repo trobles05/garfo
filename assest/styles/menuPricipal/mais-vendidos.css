@@ -1,0 +1,154 @@
+/* =============================================== */
+/* ESTILOS PARA A SEÇÃO 'MAIS VENDIDOS'            */
+/* =============================================== */
+
+.mais-vendidos {
+  padding: 32px 16px;
+  margin: 450px auto 0 auto;
+  background-color: #272727;
+  color: white;
+  text-align: center;
+}
+
+.mais-vendidos h2 {
+  font-size: 2rem;
+  margin: 20px 0 30px 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  gap: 20px;
+}
+
+.carousel-item {
+  min-width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 16px;
+  text-align: left;
+  display: flex; /* Adicionado para alinhar conteúdo interno */
+  flex-direction: column; /* Adicionado para alinhar conteúdo interno */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.carousel-item h1 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #ffd93d;
+}
+
+.carousel-item p {
+  font-size: 1rem;
+  color: #ccc;
+  flex-grow: 1; /* Faz o parágrafo ocupar o espaço, empurrando o botão para baixo */
+  margin-bottom: 16px;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.carousel-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.indicator-dot.active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* --- ESTILOS PARA PREÇO E BOTÃO DENTRO DO CARROSSEL --- */
+
+.carousel-item .item-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Garante que fique na base do card */
+  padding-top: 16px;
+  border-top: 1px solid #404040;
+}
+
+.carousel-item .item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--cor-hover, #ffd700);
+}
+
+.carousel-item .add-cart-btn {
+  background-color: var(--cor-hover, #ffd700);
+  color: #18181b;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.carousel-item .add-cart-btn:hover {
+  background-color: #e6c200;
+}
+
+/* --- RESPONSIVIDADE --- */
+
+@media (min-width: 768px) {
+  .carousel-item {
+    min-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-item {
+    min-width: 33.33%;
+  }
+}
