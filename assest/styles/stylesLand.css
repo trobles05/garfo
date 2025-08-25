@@ -1,6 +1,7 @@
 @import url(./land/header.css);
 @import url(./land/carrocel.css);
 @import url(./land/sobre.css);
+@import url(./land/degustacao.css);
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +10,8 @@
 :root {
   --cor-titulo: #f0c850;
   --cor-destaque: #b4322d;
-  --cor-destaque-fechado: #43c51b;
-  --cor-destaque-aberto: #b4322d;
+  --cor-destaque-aberto: #43c51b;
+  --cor-destaque-fechado: #b4322d;
   --cor-texto: #929292;
   --cor-fundo: #2b2a2a;
   --cor-fundo2: #404040;
@@ -21,4 +22,22 @@ body {
   font-family: "Inter", sans-serif;
   background-color: var(--cor-fundo);
   color: var(--cor-texto);
+}
+.divisor {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: -60px 0 0 0; /* sobrepõe a section acima */
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* impede clique na área da curva */
+}
+
+.divisor__img {
+  width: 100%;
+  max-width: 1800px;
+  display: block;
+  pointer-events: none;
+  user-select: none;
 }

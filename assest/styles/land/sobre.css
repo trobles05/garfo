@@ -1,3 +1,35 @@
 .sobre {
   background-color: var(--cor-fundo2);
+  border-radius: 20px 20px 0 0;
+}
+
+.sobre h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin: 26px;
+  padding: 26px;
+  background: linear-gradient(
+    90deg,
+    var(--cor-texto) 30%,
+    var(--cor-titulo) 76%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.sobre__info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 62px 62px 62px;
+}
+
+.sobre__info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: justify;
+  color: var(--cor-texto);
 }

@@ -1,0 +1,87 @@
+.degustacao {
+  background-color: var(--cor-fundo);
+  padding: 50px 20px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.degustacao h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 26px;
+  padding: 26px;
+  background: linear-gradient(
+    90deg,
+    var(--cor-texto) 30%,
+    var(--cor-titulo) 76%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.degustacao__info {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  text-align: center;
+}
+
+.degustacao__item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  padding: 32px 6px;
+  background: linear-gradient(
+    180deg,
+    var(--cor-fundo) 20%,
+    var(--cor-hover) 100%
+  );
+
+  border-radius: 26px;
+  max-width: 28%;
+}
+
+.degustacao__item img {
+  width: 70%;
+  margin: 10px auto;
+  border-radius: 26px;
+}
+
+.degustacao__item h2 {
+  align-items: center;
+  font-size: 1.8rem;
+  margin: 0 auto;
+  color: rgb(255, 255, 255);
+}
+
+.degustacao__item p {
+  color: rgb(255, 255, 255);
+  max-width: 70%;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.degustacao__item.pizza {
+  max-width: 28%;
+  position: relative; /* Necessário para o deslocamento com 'top' */
+  top: -26px; /* Desloca o card inteiro para cima */
+}
+
+.degustacao__item a {
+  text-decoration: none;
+  color: var(--cor-fundo);
+  background-color: var(--cor-destaque-aberto);
+  padding: 10px;
+  border-radius: 26px;
+  width: 36%;
+  margin: 12px auto 6px auto;
+  font-weight: bold;
+}
+
+.degustacao__item a:hover {
+  background-color: var(--cor-fundo);
+  color: var(--cor-destaque-aberto);
+  transition: 0.3s;
+}
