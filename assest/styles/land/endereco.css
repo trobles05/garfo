@@ -1,0 +1,29 @@
+.endereco {
+  background-color: var(--cor-destaque);
+}
+
+.endereco h1 {
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    var(--cor-texto) 30%,
+    var(--cor-titulo) 76%
+  );
+  background-clip: text;
+  color: transparent;
+  font-size: 3rem;
+  padding: 2rem 0;
+}
+
+.endereco__geral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
+  gap: 54px;
+}
+
+.enderco__info {
+  display: flex;
+  gap: 20px;
+}
