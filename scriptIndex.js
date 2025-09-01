@@ -831,3 +831,29 @@ if (carousel) {
     });
   }
 }
+
+// ===================================================================
+// ANIMAÇÃO AO ROLAR A PÁGINA (SEÇÃO SOBRE)
+// ===================================================================
+const elementosParaAnimar = document.querySelectorAll(".sobre__restaurante");
+
+// A função que será chamada quando um elemento entrar na tela
+const callback = (entries) => {
+  entries.forEach((entry) => {
+    // Se o elemento estiver visível (intersecting)
+    if (entry.isIntersecting) {
+      // Adiciona a classe .visible para ativar a animação CSS
+      entry.target.classList.add("visible");
+    }
+  });
+};
+
+// Cria o "observador" que vai monitorar os elementos
+const observer = new IntersectionObserver(callback, {
+  threshold: 0.2, // A animação começa quando 20% do elemento estiver visível
+});
+
+// Diz ao observador para monitorar cada um dos nossos elementos
+elementosParaAnimar.forEach((element) => {
+  observer.observe(element);
+});

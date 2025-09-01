@@ -34,3 +34,46 @@
   width: 20px;
   height: 20px;
 }
+
+/* Estado inicial */
+.endereco h1,
+.enderco__mapa,
+.enderco__info {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Mapa começa deslocado da esquerda */
+.enderco__mapa {
+  transform: translateX(-60px);
+}
+
+/* Infos começam deslocadas da direita */
+.enderco__info {
+  transform: translateX(60px);
+}
+
+/* Estado final (visível) */
+.endereco h1.show,
+.enderco__mapa.show,
+.enderco__info.show {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+  .endereco__geral {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .enderco__mapa img {
+    width: 70%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .enderco__info span {
+    font-weight: 700;
+  }
+}

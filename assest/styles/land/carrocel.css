@@ -5,7 +5,7 @@
     var(--cor-fundo) 45%
   );
   width: 100%;
-  margin: 36px auto 26px auto;
+  margin: 58px auto 62px auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,24 +70,43 @@
 .carousel__texto a:hover {
   background: #a12722;
 }
-
-/* Responsivo */
-@media (max-width: 700px) {
-  .carousel__img {
-    width: 100%;
-    border-radius: 0;
-  }
-  .carousel__img img {
-    border-radius: 0;
-  }
+.carousel__texto-invicivel {
+  display: none;
+}
+@media (max-width: 1024) {
   .carousel__texto {
-    position: static;
-    margin: 16px 0 0 0;
-    max-width: 100%;
-    padding: 20px 14px;
-    border-radius: 10px;
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    max-width: 450px;
+    padding: 38px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
+  .carousel__img {
+    width: 80%;
+    max-width: 1100px;
+  }
+}
+@media (max-width: 1010px) {
   .carousel {
-    margin-top: 16px;
+    background-image: url("/assest/img/garfoDeOuro.png");
+    background-position: center;
+  }
+  .carousel__img {
+    display: none;
+  }
+
+  .carousel__texto {
+    position: relative;
+    top: 16px;
+    left: -100px;
+    padding: 38px 36px;
+
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 }

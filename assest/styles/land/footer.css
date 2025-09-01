@@ -10,13 +10,15 @@
 .rodape__coluna {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .rodape__coluna h2 {
   margin: 22px;
-  font-size: 1.2em;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
 }
+
 .rodape__logo {
   display: flex;
   align-items: center;
@@ -36,18 +38,21 @@
 
 a.rodape__item {
   display: flex;
+  width: auto;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
   padding: 8px;
   margin: 0 22px 0 22px;
-  color: #ffffff;
+  color: var(--cor-texto);
   text-decoration: none;
+  font-weight: bold;
   transition: opacity 0.3s;
 }
 
 /* Efeito visual ao passar o mouse sobre o link */
 a.rodape__item:hover {
-  opacity: 0.7; /* Deixa o link levemente transparente */
+  color: var(--cor-hover);
 }
 
 /* Ajuste no nome da classe do ícone para evitar conflito com a classe .rodape */

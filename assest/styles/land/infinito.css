@@ -1,0 +1,78 @@
+/* --- Estilos da Seção Carrossel Infinito --- */
+
+.carrossel-infinito {
+  background-color: var(--cor-fundo);
+  padding: 60px 0;
+  text-align: center;
+}
+
+.carrossel-infinito__titulo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  background: linear-gradient(
+    90deg,
+    var(--cor-texto) 30%,
+    var(--cor-titulo) 76%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.carrossel-infinito__scroller {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.carrossel-infinito__track {
+  display: flex;
+  gap: 20px;
+  width: calc((250px + 20px) * 4);
+  animation: scroll 110s linear infinite;
+}
+.carrossel-infinito__scroller:hover .carrossel-infinito__track {
+  animation-play-state: paused;
+}
+
+.carrossel-infinito__img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* A definição da animação */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * ((250px + 20px) * 4)));
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .carrossel-infinito {
+    padding: 110px 0;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-1 * ((250px + 20px) * 4)));
+    }
+  }
+}

@@ -2,8 +2,9 @@
   background-color: var(--cor-fundo2);
   border-radius: 20px 20px 0 0;
 }
-
 .sobre h1 {
+  opacity: 1; /* visível desde o início */
+  transform: none;
   text-align: center;
   font-size: 2.8rem;
   margin: 26px;
@@ -32,4 +33,40 @@
   line-height: 1.6;
   text-align: justify;
   color: var(--cor-texto);
+}
+
+.sobre__info {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Estado animado */
+.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 1024px) {
+  .sobre__info {
+    flex-direction: column-reverse;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .sobre__info p {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sobre__info {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  .sobre__info img {
+    width: 100%;
+    height: auto;
+  }
 }
