@@ -25,5 +25,12 @@
 
 .enderco__info {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.endereco__img {
+  width: 20px;
+  height: 20px;
 }

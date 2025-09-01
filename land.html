@@ -34,7 +34,7 @@
     </header>
 
     <main>
-      <section class="carousel">
+      <section class="carousel" id="carousel">
         <div class="carousel__img">
           <img
             src="./assest/img/garfoDeOuro.png"
@@ -53,7 +53,7 @@
         </div>
       </section>
 
-      <section class="sobre">
+      <section class="sobre" id="sobre">
         <div class="sobre__restaurante">
           <h1>Melhor da Fronteira</h1>
           <div class="sobre__info">
@@ -90,7 +90,7 @@
       <div class="divisor">
         <img src="./assest/img/divisor.png" alt="" class="divisor__img" />
       </div>
-      <section class="degustacao">
+      <section class="degustacao" id="degustacao">
         <h1>Degustação</h1>
         <div class="degustacao__info">
           <div class="degustacao__item">
@@ -120,7 +120,7 @@
       <div class="divisor">
         <img src="./assest/img/Rectangle 160.png" alt="" class="divisor__img" />
       </div>
-      <section class="endereco">
+      <section class="endereco" id="endereco">
         <h1>Nosso Endereço</h1>
         <div class="endereco__geral">
           <div class="enderco__mapa">
@@ -128,12 +128,21 @@
           </div>
           <div>
             <div class="enderco__info">
-              <img src="./assest/img/enderecoIcon.png" alt=" " />
-              <p>Avenida Brasil, 2752 – Centro, Ponta Porã – MS</p>
+              <img
+                src="./assest/img/enderecoIcon.png"
+                alt="Ícone de endereço"
+                class="endereco__img"
+              />
+              <span>Avenida Brasil, 2752 – Centro, Ponta Porã – MS</span>
             </div>
+
             <div class="enderco__info">
-              <img src="./assest/img/telefone.png" alt=" " />
-              <p>+55 (67) 3431‑5536</p>
+              <img
+                src="./assest/img/telefone.png"
+                alt="Ícone de telefone"
+                class="endereco__img"
+              />
+              <span>+55 (67) 3431‑5536</span>
             </div>
           </div>
         </div>
@@ -141,37 +150,77 @@
       <div class="divisor">
         <img src="./assest/img/Rectangle 161.png" alt="" class="divisor__img" />
       </div>
-      <footer class="rodape">
-        <div class="rodape__rede-social">
-          <h1></h1>
 
-          <div>
-            <div>
-              <img src="" alt="" />
-              <p></p>
-            </div>
-            <div>
-              <img src="" alt="" />
-              <p></p>
-            </div>
-          </div>
-          <div class="rodape__logo">
-            <img src="" alt="" />
-          </div>
-          <div class="rodape__link">
-            <h1></h1>
-            <div>
-              <img src="" alt="" />
-              <p></p>
-            </div>
-            <div>
-              <img src="" alt="" />
-              <p></p>
-            </div>
-          </div>
+      <footer class="rodape">
+        <div class="rodape__coluna">
+          <h2>Redes Sociais</h2>
+          <a class="rodape__item" href="#instagram">
+            <img
+              src="./assest/img/instagram.png"
+              alt="Ícone do Instagram"
+              class="rodape__icone"
+            />
+            <span>instagram</span>
+          </a>
+          <a class="rodape__item" href="#whatsapp">
+            <img
+              src="./assest/img/zap.png"
+              alt="Ícone do Whatsapp"
+              class="rodape__icone"
+            />
+            <span>Whatsapp</span>
+          </a>
         </div>
-        <div class="rodape__info">
-          <p>(@)</p>
+
+        <div class="rodape__coluna">
+          <div class="rodape__logo">
+            <img src="./assest/img/logoTexto.png" alt="Logo da empresa" />
+          </div>
+          <h2 rodape__titulo>Garfo de Ouro © 2025</h2>
+        </div>
+
+        <div class="rodape__coluna">
+          <h2>Navegação</h2>
+          <a class="rodape__item" href="#">
+            <img
+              src="./assest/img/seta.png"
+              alt="Seta para cima"
+              class="rodape__icone"
+            />
+            <span>Voltar ao topo</span>
+          </a>
+          <a class="rodape__item" href="#sobre">
+            <img
+              src="./assest/img/sobre.png"
+              alt="Ícone Sobre"
+              class="rodape__icone"
+            />
+            <span>Sobre</span>
+          </a>
+          <a class="rodape__item" href="#espacokids">
+            <img
+              src="./assest/img/kids.png"
+              alt="Ícone Espaço Kids"
+              class="rodape__icone"
+            />
+            <span>Espaço kids</span>
+          </a>
+          <a class="rodape__item" href="#degustacao">
+            <img
+              src="./assest/img/prato.png"
+              alt="Ícone Degustação"
+              class="rodape__icone"
+            />
+            <span>Degustação</span>
+          </a>
+          <a class="rodape__item" href="#endereco">
+            <img
+              src="./assest/img/mapa.png"
+              alt="Ícone de Endereço"
+              class="rodape__icone"
+            />
+            <span>Endereço</span>
+          </a>
         </div>
       </footer>
     </main>
