@@ -7,31 +7,47 @@
     <title>Garfo de Ouro</title>
   </head>
   <body>
-    <header>
-      <div class="degrade">
-        <div class="header__container">
-          <div class="header__info">
-            <div class="header__logo">
-              <img src="./assest/img/logoTexto.png" alt="" />
+     <header>
+        <div class="degrade">
+            <div class="header__container">
+                <div class="header__info">
+                    <div class="header__logo">
+                        <img src="./assest/img/logoTexto.png" alt="Logo" />
+                    </div>
+                  
+                    <nav>
+                        <ul class="header__menu">
+                            <li class="header__item"><a href="land.html">Sobre</a></li>
+                            <li class="header__item"><a href="about.html">Degustação</a></li>
+                            <li class="header__item"><a href="service.html">Endereço</a></li>
+                            <li class="header__menu">
+                                <a href="index.html" class="menu">Menu</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="hamburger" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            <nav>
-              <ul class="header__menu">
-                <li class="header__item"><a href="land.html">Sobre</a></li>
-                <li class="header__item">
-                  <a href="about.html">Degustação</a>
-                </li>
-                <li class="header__item">
-                  <a href="service.html">Endereço</a>
-                </li>
-                <li class="header__menu">
-                  <a href="index.html" class="menu">Menu</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
-      </div>
+
+        <!-- Menu Mobile -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" onclick="toggleMenu()">&times;</button>
+            <div class="header__item"><a href="land.html" onclick="toggleMenu()">Sobre</a></div>
+            <div class="header__item"><a href="about.html" onclick="toggleMenu()">Degustação</a></div>
+            <div class="header__item"><a href="service.html" onclick="toggleMenu()">Endereço</a></div>
+            <div class="header__item">
+                <a href="index.html" class="menu" onclick="toggleMenu()">Menu</a>
+            </div>
+        </div>
     </header>
+
+
 
     <main>
       <section class="carousel" id="carousel">
@@ -41,15 +57,7 @@
             alt="Salão do restaurante Garfo de Ouro"
           />
 
-          <div class="carousel__texto-invicivel">
-            <h2 class="">Sua noite merece o melhor sabor!</h2>
-            <p>
-              Viva uma experiência completa com nosso rodízio de pizzas, massas
-              e pratos especiais! Venha jantar com a gente ou peça no dia da sua
-              casa!
-            </p>
-            <a href="index.html">Faça Seu Pedido</a>
-          </div>
+         
         </div>
         <div class="carousel__texto">
             <h2 class="">Sua noite merece o melhor sabor!</h2>
@@ -169,7 +177,7 @@
             <p>Opções preparadas na hora com o melhor da nossa cozinha.</p>
             <a href="">Comprar</a>
           </div>
-          <div class="degustacao__item pizza">
+          <div class="degustacao__pizza">
             <img src="./assest/img/pizza.png" alt="" />
             <h2>Pizza</h2>
             <p>Uma exeploção de sabor unico nos nosso sobores de pizza</p>
@@ -183,7 +191,7 @@
               sua fome.
             </p>
             <a href="">Comprar</a>
-            <!-- <a href="index.html#nome-da-section" class="btn">Comprar</a> -->
+          
           </div>
         </div>
       </section>
