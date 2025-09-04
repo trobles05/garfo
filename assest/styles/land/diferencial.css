@@ -68,3 +68,23 @@
     padding-bottom: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .diferenciais {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 320px) {
+  .diferenciais {
+    margin: 0 12px;
+  }
+
+  .diferenciais h2 {
+    margin: 2px;
+    padding: 12px;
+  }
+  .diferenciais__grid {
+    margin: 0 auto;
+  }
+}

@@ -47,7 +47,7 @@
   transform: scale(1);
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .sobre__info {
     flex-direction: column-reverse;
     max-width: 80%;
@@ -59,7 +59,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .sobre__info {
     max-width: 70%;
     margin: 0 auto;
@@ -68,5 +68,32 @@
   .sobre__info img {
     width: 100%;
     height: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sobre__info {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .sobre__restaurante h1 {
+    margin: 12px;
+  }
+
+  .sobre__info p {
+    padding: 18px 12px 3rem 12px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .sobre__info {
+    max-width: 100%;
+    padding: 6px;
+    margin: 0 6px;
+  }
+
+  .divisor__img {
+    width: 100%;
+    margin: 0;
   }
 }

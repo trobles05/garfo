@@ -71,3 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elementos.forEach((el) => observer.observe(el));
 });
+
+function toggleMenu() {
+  const hamburger = document.querySelector(".hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
+
+  // Prevenir scroll do body quando menu estiver aberto
+  if (mobileMenu.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}
+
+// Fechar menu ao redimensionar a tela
+window.addEventListener("resize", function () {
+  if (window.innerWidth > 768) {
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburger.classList.remove("active");
+    mobileMenu.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});

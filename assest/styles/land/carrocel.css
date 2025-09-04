@@ -1,3 +1,4 @@
+/* CSS Base - Desktop */
 .carousel {
   background: linear-gradient(
     180deg,
@@ -30,8 +31,8 @@
 
 .carousel__texto {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 120px;
+  left: 80px;
   color: #fff;
   padding: 38px 36px;
   border-radius: 12px;
@@ -70,43 +71,207 @@
 .carousel__texto a:hover {
   background: #a12722;
 }
+
 .carousel__texto-invicivel {
   display: none;
 }
-@media (max-width: 1024) {
-  .carousel__texto {
-    position: absolute;
-    top: 0px;
-    left: 40px;
-    max-width: 450px;
-    padding: 38px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+
+/* ===== MEDIA QUERIES RESPONSIVAS ===== */
+
+/* Tablet Landscape - 1024px */
+@media screen and (max-width: 1024px) {
+  .carousel {
+    margin: 48px auto 52px auto;
   }
+
   .carousel__img {
-    width: 80%;
-    max-width: 1100px;
+    width: 98%;
+    margin-top: 60px;
+  }
+
+  .carousel__texto {
+    top: 100px;
+    left: 60px;
+    padding: 32px 28px;
+    max-width: 420px;
+  }
+
+  .carousel__texto h2 {
+    font-size: 2rem;
+  }
+
+  .carousel__texto p {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  .carousel__texto a {
+    width: 60%;
+    font-size: 1rem;
+    padding: 10px 24px;
   }
 }
-@media (max-width: 1010px) {
-  .carousel {
-    background-image: url("/assest/img/garfoDeOuro.png");
-    background-position: center;
+@media screen and (max-width: 891px) {
+  .carousel__texto {
+    top: 50px;
   }
-  .carousel__img {
+}
+
+@media screen and (max-width: 815px) {
+  .carousel__texto {
+    top: 55px;
+  }
+}
+/* Tablet Portrait - 768px - Background Image */
+@media screen and (max-width: 768px) {
+  .carousel {
+    /* Imagem de fundo */
+    background-image: url("/assest/img/frenteGarfo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    min-height: 400px;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .carousel__texto {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 1rem 2rem;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 50%;
+    width: 50%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  /* Ocultar a imagem original */
+  .carousel__img img {
     display: none;
   }
 
-  .carousel__texto {
-    position: relative;
-    top: 16px;
-    left: -100px;
-    padding: 38px 36px;
+  .carousel__texto h2 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
 
-    max-width: 520px;
-    display: flex;
-    flex-direction: column;
+  .carousel__texto p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .carousel__texto a {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+/* Mobile Large - 480px - Imagem + Texto Embaixo */
+@media screen and (max-width: 480px) {
+  .carousel {
+    background-image: none;
+  }
+
+  .carousel__texto {
+    text-align: center;
+    padding: 1rem;
+    margin: 0 auto;
+    border-radius: 26px;
+    max-width: 100%;
+    width: 80%;
+  }
+
+  .carousel__texto h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #f0c850;
+    font-weight: 700;
+  }
+
+  .carousel__texto p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--cor-texto);
+  }
+
+  .carousel__texto a {
+    display: inline-block;
+    background: #b4322d;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 26px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .carousel__texto a:hover {
+    background: #a12722;
+  }
+}
+
+/* Mobile Small - 320px */
+@media screen and (max-width: 320px) {
+  .carousel {
+    margin: 20px auto 30px auto;
+    padding: 16px;
+  }
+
+  .carousel__img {
+    border-radius: 10px;
+  }
+
+  .carousel__img img {
+    border-radius: 10px;
+  }
+
+  .carousel__texto-invicivel {
+    padding: 24px 16px;
     gap: 12px;
+  }
+
+  .carousel__texto-invicivel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .carousel__texto-invicivel p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .carousel__texto-invicivel a {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    width: 90%;
+  }
+}
+
+/* Para telas muito pequenas - ajuste extra */
+@media screen and (max-width: 280px) {
+  .carousel__texto-invicivel h2 {
+    font-size: 1.2rem;
+  }
+
+  .carousel__texto-invicivel p {
+    font-size: 0.9rem;
+  }
+
+  .carousel__texto-invicivel a {
+    width: 100%;
+    font-size: 0.9rem;
   }
 }
