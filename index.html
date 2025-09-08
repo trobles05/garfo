@@ -24,9 +24,10 @@
           <a href="/land.html">
             <img
               class="header__img"
-              src="/assest/img/logo.png"
+              src="assest/img/logoTexto.png"
               alt="logo garfo de ouro"
-          /></a>
+            />
+          </a>
         </div>
         <div class="header__menu">
           <nav>
@@ -41,14 +42,30 @@
               <li class="header__menu-item">
                 <a href="#lanches-normais">Lanches</a>
               </li>
-              <li class="header__menu-item">
+              <li class="header__menu-item ">
                 <a href="/land.html">Sobre o Garfo</a>
               </li>
             </ul>
           </nav>
+        </div> 
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-      </div>
     </header>
+
+     <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="toggleMenu()">&times;</button>
+    <ul>
+        <li class="header__menu-item"><a href="#pizzas" onclick="toggleMenu()">Pizzas</a></li>
+        <li class="header__menu-item"><a href="#porcoes-ouro" onclick="toggleMenu()">Porções de Ouro</a></li>
+        <li class="header__menu-item"><a href="#marmitas" onclick="toggleMenu()">Marmitas</a></li>
+        <li class="header__menu-item"><a href="#lanches-normais" onclick="toggleMenu()">Lanches</a></li>
+        <li class="header__menu-item"><a href="/land.html" onclick="toggleMenu()">Sobre o Garfo</a></li>
+    </ul>
+</div>
+
     <main id="menu">
       <section class="video__fundo">
         <video autoplay muted loop id="bg-video">

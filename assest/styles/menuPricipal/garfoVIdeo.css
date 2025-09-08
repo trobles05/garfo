@@ -53,7 +53,13 @@
   font-weight: 700;
   margin-bottom: 8px;
   letter-spacing: 1px;
-  color: var(--cor-hover);
+  background: linear-gradient(
+    90deg,
+    var(--cor-texto) 30%,
+    var(--cor-titulo) 76%
+  );
+  background-clip: text;
+  color: transparent;
 }
 
 .video-section__container > span {
@@ -77,4 +83,15 @@
 .video-section__abert-fechado span {
   color: var(--cpr-texto);
   letter-spacing: 0.5px;
+}
+
+.status-open {
+  background-color: #22c55e; /* Verde */
+  color: white;
+}
+
+/* Classe para o status FECHADO */
+.status-closed {
+  background-color: #ef4444; /* Vermelho */
+  color: white;
 }

@@ -9,7 +9,7 @@
 .pizzas h2 {
   text-align: left;
   font-size: 2.2rem;
-  color: var(--cor-hover, #ffd700);
+  color: var(--cor-hover);
   margin-bottom: 46px;
   font-weight: 700;
   text-shadow: 1px 1px 6px #18181b;

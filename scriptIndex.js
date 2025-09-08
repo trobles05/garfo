@@ -778,7 +778,7 @@ checkoutBtn.addEventListener("click", function () {
 function checkRestaurantOpen() {
   const data = new Date();
   const hora = data.getHours();
-  return hora >= 17 && hora < 23;
+  return hora >= 18 && hora < 23;
 }
 
 const spanItem = document.getElementById("data-span");
@@ -856,4 +856,68 @@ const observer = new IntersectionObserver(callback, {
 // Diz ao observador para monitorar cada um dos nossos elementos
 elementosParaAnimar.forEach((element) => {
   observer.observe(element);
+});
+
+// Localize esta função no seu scriptIndex.js
+function addToCart(name, price) {
+  const existingItem = cart.find((item) => item.name === name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ name, price, quantity: 1 });
+  }
+
+  // ATUALIZAÇÃO: Adicione a notificação Toastify aqui
+  Toastify({
+    text: "Item adicionado ao carrinho!",
+    duration: 3000,
+    gravity: "top",
+    position: "right",
+    style: {
+      background: "#22c55e", // Verde para sucesso
+      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    },
+    offset: {
+      y: 20, // Um pequeno espaço do topo
+    },
+  }).showToast();
+
+  // O resto da função continua igual
+  updateCartModal();
+}
+
+function toggleMenu() {
+  const hamburger = document.querySelector(".hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
+
+  if (mobileMenu.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}
+
+document.addEventListener("click", function (event) {
+  const hamburger = document.querySelector(".hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
+    hamburger.classList.remove("active");
+    mobileMenu.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+});
+
+window.addEventListener("resize", function () {
+  if (window.innerWidth > 768) {
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburger.classList.remove("active");
+    mobileMenu.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
 });
