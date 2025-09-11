@@ -15,12 +15,14 @@
   text-shadow: 1px 1px 6px #18181b;
 }
 
-.marmita-grid {
+/* Grid para marmitas e la cartes */
+.marmita__la-carte {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
 }
 
+/* Card de marmita e la carte */
 .marmita-item {
   background: var(--cor-texto);
   border-radius: 14px;
@@ -49,7 +51,7 @@
   grid-column: 1;
 }
 
-.marmita-item h3,
+.marmita-item h1,
 .marmita-item p,
 .marmita-item .marmita-price,
 .marmita-item button {
@@ -57,7 +59,7 @@
   text-align: left;
 }
 
-.marmita-item h3 {
+.marmita-item h1 {
   font-size: 1.2rem;
   color: #18181b;
   margin-bottom: 8px;
@@ -95,7 +97,7 @@
 }
 
 @media (max-width: 768px) {
-  .marmita-grid {
+  .marmita__la-carte {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -112,7 +114,7 @@
     grid-row: 1;
     margin: 0 auto 12px auto;
   }
-  .marmita-item h3,
+  .marmita-item h1,
   .marmita-item p,
   .marmita-item .marmita-price,
   .marmita-item button {

@@ -11,9 +11,9 @@
 @import url(./menuPricipal/cartModalPizza.css);
 @import url(./menuPricipal/cartModalPorca.css);
 @import url(./menuPricipal/cartModalMarmita.css);
+@import url(./menuPricipal/cartModalLaCarte.css);
 @import url(./menuPricipal/cartModalLanches.css);
 @import url(./menuPricipal/cartModalBebidas.css);
-
 @import url(./land/header.css);
 
 * {

@@ -40,6 +40,9 @@
                 <a href="#marmitas">Marmitas</a>
               </li>
               <li class="header__menu-item">
+                <a href="#la-carte"> lá cartes</a>
+              </li>
+              <li class="header__menu-item">
                 <a href="#lanches-normais">Lanches</a>
               </li>
               <li class="header__menu-item ">
@@ -338,16 +341,29 @@
 
       <!-- Marmitas -->
       <section id="marmitas" class="marmitas">
-        <h2>Marmitas</h2>
-        <div class="marmita-grid">
-          <div class="marmita-item">
-            <img
-              src="https://placehold.co/300x200/22d3ee/white?text=Marmita+do+Dia"
-              alt="Marmita do Dia"
-            />
-            <h1>Marmita do Dia</h1>
-            <p>Veja as deliciosas opções disponíveis hoje!</p>
-            <button class="choose-meal-btn">Ver Opções</button>
+        <h2>Marmitas e pratos a lá cartes</h2>
+        <div class="marmita__la-carte">
+          <div class="marmita-grid">
+            <div class="marmita-item">
+              <img
+                src="https://placehold.co/300x200/22d3ee/white?text=Marmita+do+Dia"
+                alt="Marmita do Dia"
+              />
+              <h1>Marmita do Dia</h1>
+              <p>Veja as deliciosas opções disponíveis hoje!</p>
+              <button class="choose-meal-btn">Ver Opções</button>
+            </div>
+          </div>
+          <div class="marmita-grid" id="la-carte">
+            <div class="marmita-item">
+              <img
+                src="https://placehold.co/300x200/22d3ee/white?text=Marmita+do+Dia"
+                alt="Lá cartes"
+              />
+              <h1>Pratos a lá cartes</h1>
+              <p>Veja os mais diveros pratos</p>
+              <button class="choose-la-carte-btn">Ver Opções</button>
+            </div>
           </div>
         </div>
       </section>
@@ -434,22 +450,60 @@
     </main>
 
     <!-- Carrinho Modal -->
-    <div id="cart-modal" class="modal">
-      <div class="modal-content">
-        <h2>Meu carrinho</h2>
-        <div id="cart-items"></div>
-        <input type="text" placeholder="Observação" id="address-obs" />
-        <p class="price">Total: <span id="cart-total">00.00</span></p>
-        <p class="title">Endereço de entrega:</p>
-        <input type="text" placeholder="Digite seu endereço" id="address" />
+   <div id="cart-modal" class="modal">
+  <div class="modal-content">
+    <h2>Meu carrinho</h2>
 
-        <p id="address-warn" class="">Digite seu endereço completo!</p>
-        <div class="buttons">
-          <button id="close-modal-btn">Fechar</button>
-          <button id="checkout-btn">Finalizar pedido</button>
-        </div>
+    <!-- Itens do carrinho serão inseridos aqui pelo JS -->
+    <div id="cart-items"></div>
+
+    <!-- Total e Observação -->
+    <p class="price">Total: <span id="cart-total">00.00</span></p>
+    <input
+      type="text"
+      placeholder="Observação (opcional)"
+      id="address-obs"
+    />
+
+    <!-- OPÇÕES DE ENTREGA / RETIRADA -->
+    <div class="delivery-options">
+      <p class="title">Como você prefere receber?</p>
+      <div class="delivery-choice">
+        <label>
+          <input
+            type="radio"
+            name="delivery-method"
+            value="retirada"
+            checked
+          />
+          Retirar no Local
+        </label>
+        <label>
+          <input type="radio" name="delivery-method" value="entrega" />
+          Receber por Entrega
+        </label>
       </div>
     </div>
+
+    <!-- CONTAINER DO ENDEREÇO (escondido por padrão) -->
+    <div id="address-container" class="hidden">
+      <p class="title">Endereço de entrega:</p>
+      <input
+        type="text"
+        placeholder="Digite seu endereço completo"
+        id="address"
+      />
+      <p id="address-warn" class="hidden">Digite seu endereço completo!</p>
+    </div>
+
+    <!-- Botões de ação -->
+    <div class="buttons">
+      <button id="close-modal-btn">Fechar</button>
+      <button id="checkout-btn">Finalizar pedido</button>
+    </div>
+  </div>
+</div>
+
     <!-- Pizza Modal -->
     <div class="modal" id="pizza-modal">
       <div class="modal-content">
@@ -518,6 +572,23 @@
         </div>
       </div>
     </div>
+
+    <!-- La Carte Modal -->
+<div class="modal" id="la-carte-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="la-carte-modal-title">Escolha seu Prato Feito</h2>
+      <button id="close-la-carte-modal-btn" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body" id="la-carte-options-container">
+      <!-- O JavaScript vai inserir as opções de pratos feitos aqui -->
+    </div>
+    <div class="modal-footer">
+      <p>Total do item: <span id="la-carte-item-total">R$ 0,00</span></p>
+      <button id="add-la-carte-to-cart-btn">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
     <!-- Marmita Modal -->
     <div class="modal" id="meal-modal">
       <div class="modal-content">

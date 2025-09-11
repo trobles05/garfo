@@ -1,4 +1,4 @@
-// --- SELEÇÃO DE ELEMENTOS DO DOM (CARRINHO ORIGINAL) ---
+// --- SELEÇÃO DE ELEMENTOS DO DOM (CARRINHO E MODAIS) ---
 const menu = document.getElementById("menu");
 const cartBtn = document.getElementById("cart-btn");
 const cartModal = document.getElementById("cart-modal");
@@ -10,8 +10,6 @@ const cartCounter = document.getElementById("cart-count");
 const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const addressObs = document.getElementById("address-obs");
-
-// --- SELEÇÃO DE ELEMENTOS DO DOM (MODAIS) ---
 const pizzaModal = document.getElementById("pizza-modal");
 const pizzaModalTitle = document.getElementById("pizza-modal-title");
 const closePizzaModalBtn = document.getElementById("close-pizza-modal-btn");
@@ -21,21 +19,18 @@ const pizzaFlavorsContainer = document.getElementById(
 const selectedFlavorsCount = document.getElementById("selected-flavors-count");
 const maxFlavorsCount = document.getElementById("max-flavors-count");
 const addPizzaToCartBtn = document.getElementById("add-pizza-to-cart-btn");
-
 const portionModal = document.getElementById("portion-modal");
 const portionModalTitle = document.getElementById("portion-modal-title");
 const closePortionModalBtn = document.getElementById("close-portion-modal-btn");
 const portionOptionsContainer = document.getElementById(
   "portion-options-container"
 );
-
 const mealModal = document.getElementById("meal-modal");
 const mealModalTitle = document.getElementById("meal-modal-title");
 const closeMealModalBtn = document.getElementById("close-meal-modal-btn");
 const mealOptionsContainer = document.getElementById("meal-options-container");
 const mealItemTotal = document.getElementById("meal-item-total");
 const addMealToCartBtn = document.getElementById("add-meal-to-cart-btn");
-
 const sandwichModal = document.getElementById("sandwich-modal");
 const sandwichModalTitle = document.getElementById("sandwich-modal-title");
 const closeSandwichModalBtn = document.getElementById(
@@ -47,7 +42,6 @@ const sandwichOptionsContainer = document.getElementById(
 const addSandwichToCartBtn = document.getElementById(
   "add-sandwich-to-cart-btn"
 );
-
 const drinkModal = document.getElementById("drink-modal");
 const drinkModalTitle = document.getElementById("drink-modal-title");
 const closeDrinkModalBtn = document.getElementById("close-drink-modal-btn");
@@ -57,130 +51,783 @@ const drinkOptionsContainer = document.getElementById(
 const drinkItemTotal = document.getElementById("drink-item-total");
 const addDrinkToCartBtn = document.getElementById("add-drink-to-cart-btn");
 
+// --- NOVOS SELETORES PARA OPÇÃO DE ENTREGA ---
+const deliveryOptions = document.querySelectorAll(
+  'input[name="delivery-method"]'
+);
+const addressContainer = document.getElementById("address-container");
+
 let cart = [];
-// Variáveis para modais
 let pizzaSize = "";
 let maxFlavors = 1;
-let currentDrinkType = ""; // Variável para saber qual categoria de bebida está aberta
+let currentDrinkType = "";
 
 // ===================================================================
-// BANCO DE DADOS DE PRODUTOS
+// BANCO DE DADOS DE PRODUTOS (EXTRAÍDO DO CARDÁPIO GARFO DE OURO)
 // ===================================================================
 
+// NOTA: O cardápio possui preços P, M e G. A estrutura atual suporta apenas um preço.
+// Foi usado o preço da pizza GRANDE (G) como referência.
 const pizzaFlavors = [
+  // Pizzas Salgadas
   {
     id: 1,
-    name: "Calabresa",
-    description: "Mussarela, calabresa fatiada, cebola e azeitonas.",
-    img: "https://placehold.co/100x100/ef4444/white?text=Calabresa",
-    price: 55.0,
+    name: "Moda da Casa",
+    description:
+      "Mussarela, presunto, tomate, calabresa, bacon, cebola, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 80.0,
   },
   {
     id: 2,
-    name: "Frango com Catupiry",
-    description: "Frango desfiado, catupiry cremoso, milho e azeitonas.",
-    img: "https://placehold.co/100x100/f97316/white?text=Frango",
-    price: 58.5,
+    name: "Atum",
+    description:
+      "Mussarela, tomate, atum, ervilha, cebola, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 72.0,
   },
   {
     id: 3,
+    name: "Bacon",
+    description: "Mussarela, bacon, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 4,
+    name: "Baiana",
+    description:
+      "Mussarela, filé, cebola, calabresa, tomate, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 82.0,
+  },
+  {
+    id: 5,
+    name: "Calabresa",
+    description: "Mussarela, cebola, calabresa, tomate, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 72.0,
+  },
+  {
+    id: 6,
+    name: "Canadense",
+    description:
+      "Mussarela, lombo canadense, champignon, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 82.0,
+  },
+  {
+    id: 7,
+    name: "Catupiry",
+    description: "Mussarela, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 74.0,
+  },
+  {
+    id: 8,
+    name: "Catufilé",
+    description: "Mussarela, filé, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 90.0,
+  },
+  {
+    id: 9,
+    name: "Cremosa",
+    description: "Mussarela, creme de leite, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 64.0,
+  },
+  {
+    id: 10,
+    name: "5 Queijos",
+    description:
+      "Mussarela, provolone, queijo prato, parmesão, requeijão, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 72.5,
+  }, // Preço M no cardapio, G não informado
+  {
+    id: 11,
+    name: "Espanhola",
+    description: "Mussarela, calabresa, ovo, bacon, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 12,
+    name: "Escarola",
+    description: "Mussarela, chicória, alho, bacon, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 78.0,
+  },
+  {
+    id: 13,
+    name: "Frango ao Milho",
+    description:
+      "Mussarela, frango, milho, creme de leite, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 68.0,
+  },
+  {
+    id: 14,
+    name: "Frango Catupiry",
+    description: "Mussarela, frango, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 67.0,
+  },
+  {
+    id: 15,
+    name: "Frango com Palmito",
+    description: "Mussarela, frango, catupiry, palmito, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 70.0,
+  },
+  {
+    id: 16,
+    name: "Filé Acebolado",
+    description: "Mussarela, filé, cebola, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 80.0,
+  },
+  {
+    id: 17,
+    name: "Lombo ao Creme",
+    description:
+      "Mussarela, lombo canadense, tomate, catupiry, creme de leite, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 72.0,
+  },
+  {
+    id: 18,
+    name: "Marguerita",
+    description: "Mussarela, tomate, manjericão e azeitona.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 64.0,
+  },
+  {
+    id: 19,
+    name: "Mexicana",
+    description:
+      "Mussarela, bacon, calabresa, pimenta vermelha, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 20,
+    name: "Milho",
+    description: "Mussarela, milho verde, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 66.0,
+  },
+  {
+    id: 21,
+    name: "Mineira",
+    description:
+      "Mussarela, calabresa, ervilha, palmito, catupiry, creme de leite, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 22,
+    name: "Mussarela",
+    description: "Mussarela, tomate, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 62.0,
+  },
+  {
+    id: 23,
+    name: "Manchester",
+    description:
+      "Mussarela, tomate picado, milho, palmito, calabresa, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 72.0,
+  },
+  {
+    id: 24,
+    name: "Napolitana",
+    description: "Mussarela, tomate, presunto, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 66.0,
+  },
+  {
+    id: 25,
+    name: "Paulista",
+    description:
+      "Mussarela, lombo canadense, palmito, milho, calabresa picada, creme de leite, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 26,
+    name: "Palmito",
+    description:
+      "Mussarela, palmito picado, tomate picado, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 66.0,
+  },
+  {
+    id: 27,
     name: "Portuguesa",
-    description: "Presunto, mussarela, ovo, cebola, pimentão e azeitonas.",
-    img: "https://placehold.co/100x100/84cc16/white?text=Portuguesa",
-    price: 60.0,
+    description:
+      "Mussarela, presunto, ovos, tomate, milho, seleta de legumes, cebola, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 66.0,
+  },
+  {
+    id: 28,
+    name: "Peperone",
+    description: "Mussarela, tomate, fatias de peperone, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 29,
+    name: "Romanesca",
+    description: "Mussarela, presunto, bacon, catupiry, champignon e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 76.0,
+  },
+  {
+    id: 30,
+    name: "Strogonoff de Carne",
+    description:
+      "Mussarela, strogonoff de carne, batata palha, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 82.0,
+  },
+  {
+    id: 31,
+    name: "Strogonoff de Frango",
+    description:
+      "Mussarela, strogonoff de frango, batata palha, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 32,
+    name: "Stalo",
+    description:
+      "Mussarela, presunto, frango, palmito, calabresa, tomate picado, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 33,
+    name: "Toscana",
+    description: "Mussarela, calabresa, palmito, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 74.0,
+  },
+  {
+    id: 34,
+    name: "Toledo",
+    description:
+      "Mussarela, lombo canadense, palmito, catupiry, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 75.0,
+  },
+  {
+    id: 35,
+    name: "Tomate Seco com Rúcula",
+    description: "Mussarela, tomate seco, rúcula fresca, azeitona e orégano.",
+    img: "https://placehold.co/100x100/ef4444/white?text=Pizza",
+    price: 68.0,
+  },
+  // Pizzas Doces
+  {
+    id: 36,
+    name: "Banana com Canela",
+    description: "Leite condensado, banana e canela.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 62.5,
+  },
+  {
+    id: 37,
+    name: "Beijinho",
+    description:
+      "Creme de leite, coco ralado, leite condensado e chocolate branco.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 67.0,
+  },
+  {
+    id: 38,
+    name: "Brigadeiro",
+    description: "Creme de leite, chocolate preto e chocolate granulado.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 64.5,
+  },
+  {
+    id: 39,
+    name: "Sedução",
+    description: "Creme de leite, chocolate preto, leite condensado e morango.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 67.0,
+  },
+  {
+    id: 40,
+    name: "Sensação",
+    description:
+      "Creme de leite, chocolate branco, leite condensado e morango.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 67.5,
+  },
+  {
+    id: 41,
+    name: "Romeu & Julieta",
+    description: "Creme de leite, mussarela, goiabada e leite condensado.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 65.0,
+  },
+  {
+    id: 42,
+    name: "Sorvete",
+    description: "Sorvete napolitano com cobertura.",
+    img: "https://placehold.co/100x100/f59e0b/white?text=Doce",
+    price: 63.0,
   },
 ];
 
 const portionsData = {
-  Completa: {
-    description: "Batata frita, calabresa, bacon, frango e queijo.",
+  "Mista Completa": {
+    description:
+      "Fritas, frango a passarinho, filé picado, calabresa, mussarela, presunto e azeitona.",
     options: [
-      { size: "Meia", price: 40.0 },
-      { size: "Inteira", price: 65.0 },
+      { size: "Individual", price: 47.0 },
+      { size: "Duplo", price: 74.5 },
     ],
   },
-  Frango: {
-    description: "Deliciosos e crocantes pedaços de frango a passarinho.",
+  "Frango à Passarinho": {
+    description: "Frango a passarinho, fritas e azeitona.",
     options: [
-      { size: "Meia", price: 30.0 },
-      { size: "Inteira", price: 45.0 },
+      { size: "Individual", price: 37.0 },
+      { size: "Duplo", price: 62.0 },
+    ],
+  },
+  "Isca de Tilápia": {
+    description:
+      "Filé de tilápia empanado, fritas, azeitona e acompanhamento da casa.",
+    options: [
+      { size: "Individual", price: 45.0 },
+      { size: "Duplo", price: 75.0 },
     ],
   },
   "Batata Frita": {
-    description: "Batatas selecionadas, fritas e crocantes. Acompanha cheddar.",
+    description: "Porção de batata frita sequinha e crocante.",
     options: [
-      { size: "Meia", price: 20.0 },
-      { size: "Inteira", price: 30.0 },
+      { size: "Individual", price: 22.0 },
+      { size: "Duplo", price: 29.0 },
     ],
   },
-};
-
-const meals = {
-  "Marmita do Dia": {
+  "Filé Acebolado": {
+    description: "Filé acebolado com fritas e azeitona.",
     options: [
-      {
-        name: "Frango Grelhado",
-        description: "Arroz, feijão, salada e frango.",
-        price: 18.0,
-      },
-      {
-        name: "Bife Acebolado",
-        description: "Arroz, feijão, salada e bife.",
-        price: 20.0,
-      },
-      {
-        name: "Feijoada",
-        description: "Feijoada completa com acompanhamentos.",
-        price: 25.0,
-      },
+      { size: "Individual", price: 48.0 },
+      { size: "Duplo", price: 86.0 },
+    ],
+  },
+  "Picanha em Tiras": {
+    description: "Picanha com fritas.",
+    options: [
+      { size: "Individual", price: 50.0 },
+      { size: "Duplo", price: 89.5 },
+    ],
+  },
+  "Calabresa Acebolada": {
+    description: "Porção de calabresa fatiada e acebolada.",
+    options: [
+      { size: "Individual", price: 30.0 },
+      { size: "Duplo", price: 52.0 },
+    ],
+  },
+  "Tábua de Frios": {
+    description:
+      "Ovo de codorna, salaminho, mussarela, palmito, presunto e azeitona.",
+    options: [
+      { size: "Individual", price: 48.0 },
+      { size: "Duplo", price: 79.0 },
+    ],
+  },
+  Torresmo: {
+    description: "Porção de torresmo crocante.",
+    options: [
+      { size: "Individual", price: 35.0 },
+      { size: "Duplo", price: 57.0 },
+    ],
+  },
+  "Pastelzinho (Carne/Queijo)": {
+    description: "Pastéis de Carne ou Presunto e Queijo.",
+    options: [
+      { size: "4 Unidades", price: 29.5 },
+      { size: "8 Unidades", price: 55.5 },
+    ],
+  },
+  "Filézinho Mignon": {
+    description: "Filé mignon em tiras com fritas.",
+    options: [
+      { size: "Individual", price: 46.5 },
+      { size: "Duplo", price: 84.5 },
+    ],
+  },
+  Coraçãozinho: {
+    description: "Porção de coração de frango.",
+    options: [
+      { size: "Individual", price: 35.0 },
+      { size: "Duplo", price: 57.0 },
+    ],
+  },
+  "Massinha da Casa": {
+    description: "Massa de pizza frita da casa.",
+    options: [
+      { size: "Individual", price: 20.0 },
+      { size: "Duplo", price: 27.0 },
     ],
   },
 };
 
 const sandwichesData = {
-  Normal: [
+  "Filé Mignon": [
     {
-      name: "X-Burger",
-      description: "Pão, hambúrguer, queijo e salada.",
-      price: 15.0,
+      name: "X-Filé Bacon",
+      description: "Pão, filé, bacon, mussarela. Acompanha batata frita.",
+      price: 26.5,
     },
     {
-      name: "X-Salada",
-      description: "Pão, hambúrguer, queijo, presunto e salada.",
-      price: 17.0,
+      name: "X-Filé Salada",
+      description:
+        "Pão, filé, mussarela, alface, tomate. Acompanha batata frita.",
+      price: 24.0,
     },
     {
-      name: "X-Bacon",
-      description: "Pão, hambúrguer, queijo, bacon e salada.",
+      name: "X-Filé Simples",
+      description: "Pão, filé, mussarela. Acompanha batata frita.",
+      price: 22.0,
+    },
+    {
+      name: "X-Filé Egg",
+      description: "Pão, filé, mussarela, ovo. Acompanha batata frita.",
+      price: 24.0,
+    },
+    {
+      name: "X-Tudo",
+      description:
+        "Pão, filé, presunto, mussarela, bacon, calabresa, ovo, palmito, milho, alface, tomate, maionese. Acompanha batata frita.",
+      price: 29.5,
+    },
+  ],
+  "X-Burger": [
+    {
+      name: "X-Americano",
+      description:
+        "Hambúrguer, mussarela, ovo, presunto, alface, tomate. Acompanha batata frita.",
       price: 20.0,
     },
-  ],
-  File: [
     {
-      name: "X-Filé Mignon",
-      description: "Pão, filé mignon, queijo, cebola e salada.",
-      price: 28.0,
+      name: "X-Burguer Bacon",
+      description: "Hambúrguer, mussarela, bacon. Acompanha batata frita.",
+      price: 24.0,
     },
     {
-      name: "X-Filé Tudo",
-      description: "Pão, filé mignon, queijo, presunto, ovo, bacon e salada.",
-      price: 32.0,
+      name: "X-Burguer Salada",
+      description:
+        "Hambúrguer, mussarela, alface, tomate. Acompanha batata frita.",
+      price: 20.0,
     },
-  ],
-  Frango: [
     {
-      name: "X-Frango",
-      description: "Pão, filé de frango, queijo e salada.",
+      name: "X-Burguer Simples",
+      description: "Hambúrguer, mussarela. Acompanha batata frita.",
       price: 18.0,
     },
     {
-      name: "X-Frango Catupiry",
-      description: "Pão, filé de frango, catupiry, milho e salada.",
+      name: "X-Burguer Egg",
+      description: "Hambúrguer, mussarela, ovo. Acompanha batata frita.",
+      price: 20.0,
+    },
+    {
+      name: "X-Burguer Calabresa",
+      description: "Hambúrguer, mussarela, calabresa. Acompanha batata frita.",
       price: 22.0,
+    },
+  ],
+  "X-Frango": [
+    {
+      name: "X-Frango Bacon",
+      description:
+        "Pão, frango desfiado, bacon, mussarela. Acompanha batata frita.",
+      price: 19.0,
+    },
+    {
+      name: "X-Frango Salada",
+      description: "Pão, frango desfiado, mussarela. Acompanha batata frita.",
+      price: 19.0,
+    },
+    {
+      name: "X-Frango Egg",
+      description:
+        "Pão, frango desfiado, mussarela, ovo. Acompanha batata frita.",
+      price: 20.0,
     },
   ],
 };
 
+// Categoria "Meals" foi transformada em "aLaCarteData" para melhor representar o cardápio.
+const aLaCarteData = {
+  Filés: [
+    {
+      name: "Filé à Parmegiana",
+      description:
+        "Filé mignon à milanesa coberto com queijo ao molho vermelho. Acompanha fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 58.5 },
+        { size: "Duplo", price: 99.8 },
+      ],
+    },
+    {
+      name: "Filé Chateaubriand",
+      description:
+        "Filé mignon alto grelhado, queijo, molho madeira, champignon e presunto. Acompanha banana à milanesa, farofa, alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 58.5 },
+        { size: "Duplo", price: 99.8 },
+      ],
+    },
+    {
+      name: "Filé com Fritas",
+      description:
+        "Filé mignon grelhado. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 48.5 },
+        { size: "Duplo", price: 89.8 },
+      ],
+    },
+    {
+      name: "Filé à Milanesa c/ Fritas",
+      description:
+        "Filé à milanesa. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 48.5 },
+        { size: "Duplo", price: 89.8 },
+      ],
+    },
+    {
+      name: "Filé Executivo com Feijão",
+      description:
+        "Filé mignon grelhado. Acompanha alface, tomate, salada russa, farofa, ovos fritos, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 54.5 },
+        { size: "Duplo", price: 95.8 },
+      ],
+    },
+    {
+      name: "Filé Acebolado (Prato)",
+      description:
+        "Filé mignon grelhado com cebola. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 48.5 },
+        { size: "Duplo", price: 89.8 },
+      ],
+    },
+    {
+      name: "Filé com Legumes",
+      description:
+        "Filé mignon grelhado. Acompanha legumes na manteiga, alface, tomate e arroz branco.",
+      options: [
+        { size: "Individual", price: 48.5 },
+        { size: "Duplo", price: 89.8 },
+      ],
+    },
+  ],
+  Picanhas: [
+    {
+      name: "Picanha Acebolada",
+      description:
+        "Picanha grelhada acebolada. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 55.0 },
+        { size: "Duplo", price: 93.9 },
+      ],
+    },
+    {
+      name: "Picanha da Casa",
+      description:
+        "Picanha grelhada. Acompanha purê de batata, vinagrete, farofa, fritas e arroz.",
+      options: [
+        { size: "Individual", price: 55.0 },
+        { size: "Duplo", price: 93.9 },
+      ],
+    },
+    {
+      name: "Picanha Grelhada",
+      description:
+        "Picanha grelhada. Acompanha alface, tomate, fritas e arroz.",
+      options: [
+        { size: "Individual", price: 55.0 },
+        { size: "Duplo", price: 93.9 },
+      ],
+    },
+    {
+      name: "Picanha Alho e Óleo",
+      description:
+        "Picanha grelhada no alho e óleo. Acompanha alface, tomate, fritas e arroz.",
+      options: [
+        { size: "Individual", price: 55.0 },
+        { size: "Duplo", price: 93.9 },
+      ],
+    },
+  ],
+  Frangos: [
+    {
+      name: "Frango à Passarinho (Prato)",
+      description: "Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 50.0 },
+        { size: "Duplo", price: 75.0 },
+      ],
+    },
+    {
+      name: "Frango à Milanesa c/ Fritas",
+      description:
+        "Frango à milanesa. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 45.0 },
+        { size: "Duplo", price: 70.0 },
+      ],
+    },
+    {
+      name: "Frango à Parmegiana",
+      description:
+        "Frango à milanesa, coberto com queijo ao molho vermelho. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 50.0 },
+        { size: "Duplo", price: 75.0 },
+      ],
+    },
+    {
+      name: "Frango com Legumes",
+      description:
+        "Frango grelhado com legumes na manteiga. Acompanha alface, tomate, fritas e arroz branco.",
+      options: [
+        { size: "Individual", price: 45.0 },
+        { size: "Duplo", price: 70.0 },
+      ],
+    },
+  ],
+  Peixes: [
+    {
+      name: "Filé de Pintado ao Molho Branco",
+      description:
+        "Grelhado com molho branco e queijo gratinado. Acompanha arroz, purê de batata, banana à milanesa e pêssego.",
+      options: [
+        { size: "Individual", price: 80.0 },
+        { size: "Duplo", price: 130.0 },
+      ],
+    },
+    {
+      name: "Filé de Tilápia ao Molho Branco",
+      description:
+        "Grelhado com molho branco e queijo gratinado. Acompanha arroz, purê de batata, banana à milanesa e pêssego.",
+      options: [
+        { size: "Individual", price: 65.0 },
+        { size: "Duplo", price: 100.0 },
+      ],
+    },
+    {
+      name: "Filé de Pintado à Parmegiana",
+      description:
+        "À milanesa coberto com queijo ao molho vermelho. Acompanha fritas e arroz.",
+      options: [
+        { size: "Individual", price: 75.0 },
+        { size: "Duplo", price: 125.0 },
+      ],
+    },
+    {
+      name: "Filé de Tilápia à Parmegiana",
+      description:
+        "À milanesa coberto com queijo ao molho vermelho. Acompanha fritas e arroz.",
+      options: [
+        { size: "Individual", price: 65.0 },
+        { size: "Duplo", price: 100.0 },
+      ],
+    },
+  ],
+  Massas: [
+    {
+      name: "Lasanha Bolonhesa",
+      description: "Massa de lasanha com molho bolonhesa e queijo.",
+      options: [
+        { size: "Individual", price: 44.0 },
+        { size: "Duplo", price: 71.5 },
+      ],
+    },
+    {
+      name: "Lasanha Napolitana",
+      description: "Massa de lasanha com molho napolitano, presunto e queijo.",
+      options: [
+        { size: "Individual", price: 42.0 },
+        { size: "Duplo", price: 69.9 },
+      ],
+    },
+    {
+      name: "Espaguetti Alho e Óleo",
+      description: "Espaguetti salteado no alho e óleo.",
+      options: [
+        { size: "Individual", price: 40.0 },
+        { size: "Duplo", price: 65.0 },
+      ],
+    },
+    {
+      name: "Espaguetti Bolonhesa",
+      description: "Espaguetti com tradicional molho bolonhesa.",
+      options: [
+        { size: "Individual", price: 40.0 },
+        { size: "Duplo", price: 65.0 },
+      ],
+    },
+  ],
+  Canjas: [
+    {
+      name: "Canja de Frango",
+      description: "Frango desfiado, legumes e arroz.",
+      options: [
+        { size: "Individual", price: 35.9 },
+        { size: "Duplo", price: 44.9 },
+      ],
+    },
+    {
+      name: "Sopa de Peixe",
+      description: "Peixe tilápia e legumes.",
+      options: [
+        { size: "Individual", price: 39.9 },
+        { size: "Duplo", price: 49.9 },
+      ],
+    },
+    {
+      name: "Sopa Ministrone",
+      description: "Carne, legumes e macarrão.",
+      options: [
+        { size: "Individual", price: 39.9 },
+        { size: "Duplo", price: 49.9 },
+      ],
+    },
+  ],
+  Kids: [
+    {
+      name: "Filézinho Kids",
+      description: "Arroz, fritas e filé picado.",
+      price: 29.9,
+    },
+    {
+      name: "Franguinho Kids",
+      description: "Arroz, fritas e frango picado.",
+      price: 27.9,
+    },
+    {
+      name: "Bolonhesita Kids",
+      description: "Macarrão à bolonhesa e batata frita.",
+      price: 25.9,
+    },
+  ],
+};
+
+// NOTA: O cardápio fornecido não lista bebidas. Mantive os dados de exemplo.
 const drinksData = {
   Refrigerantes: [
     { name: "Coca-Cola Lata", price: 7.0 },
@@ -201,7 +848,6 @@ const drinksData = {
 // LÓGICA DOS MODAIS (PIZZA, PORÇÃO, MARMITA, LANCHE, BEBIDA)
 // ===================================================================
 
-// --- Abertura dos Modais ---
 menu.addEventListener("click", function (event) {
   const chooseFlavorBtn = event.target.closest(".choose-flavor-btn");
   if (chooseFlavorBtn) {
@@ -219,6 +865,7 @@ menu.addEventListener("click", function (event) {
 
   const chooseMealBtn = event.target.closest(".choose-meal-btn");
   if (chooseMealBtn) {
+    // A lógica para refeições pode precisar ser adaptada para aLaCarteData
     openMealModal();
     return;
   }
@@ -238,7 +885,6 @@ menu.addEventListener("click", function (event) {
   }
 });
 
-// --- Lógica do Modal de Pizzas ---
 function openPizzaModal(size, flavors) {
   pizzaModalTitle.textContent = `Monte sua Pizza ${size}`;
   maxFlavorsCount.textContent = flavors;
@@ -249,16 +895,16 @@ function openPizzaModal(size, flavors) {
     const flavorElement = document.createElement("div");
     flavorElement.classList.add("flavor-item");
     flavorElement.innerHTML = `
-      <img src="${flavor.img}" alt="${flavor.name}">
-      <div class="flavor-details"><h4>${flavor.name}</h4><p>${
+      <img src="${flavor.img}" alt="${flavor.name}">
+      <div class="flavor-details"><h4>${flavor.name}</h4><p>${
       flavor.description
     }</p></div>
-      <div class="flavor-price-action"><span>R$ ${flavor.price.toFixed(
-        2
-      )}</span><button class="select-flavor-btn" data-name="${
+      <div class="flavor-price-action"><span>R$ ${flavor.price.toFixed(
+      2
+    )}</span><button class="select-flavor-btn" data-name="${
       flavor.name
     }" data-price="${flavor.price}">Selecionar</button></div>
-    `;
+    `;
     pizzaFlavorsContainer.appendChild(flavorElement);
   });
 
@@ -317,13 +963,6 @@ addPizzaToCartBtn.addEventListener("click", function () {
   const finalName = `Pizza ${pizzaSize} (${flavorNames.join(" / ")})`;
   const finalPrice = Math.max(...prices);
   addToCart(finalName, finalPrice);
-  Toastify({
-    text: "Pizza adicionada ao carrinho!",
-    duration: 3000,
-    gravity: "top",
-    position: "right",
-    style: { background: "#22c55e" },
-  }).showToast();
   closePizzaModal();
 });
 
@@ -335,7 +974,6 @@ pizzaModal.addEventListener("click", (event) => {
   if (event.target === pizzaModal) closePizzaModal();
 });
 
-// --- Lógica do Modal de Porções ---
 function openPortionModal() {
   portionModalTitle.textContent = `Escolha sua Porção`;
   portionOptionsContainer.innerHTML = "";
@@ -346,20 +984,20 @@ function openPortionModal() {
     const sizeOptionsHtml = portionInfo.options
       .map(
         (opt, sizeIndex) => `
-            <input type="radio" id="portion_${index}_size_${sizeIndex}" name="portion_size_${index}" value="${
+      <input type="radio" id="portion_${index}_size_${sizeIndex}" name="portion_size_${index}" value="${
           opt.price
         }" data-size="${opt.size}">
-            <label for="portion_${index}_size_${sizeIndex}">${
+      <label for="portion_${index}_size_${sizeIndex}">${
           opt.size
         } (R$ ${opt.price.toFixed(2)})</label>
-        `
+    `
       )
       .join("");
     optionElement.innerHTML = `
-            <div class="flavor-details"><h4>${portionName}</h4><p>${portionInfo.description}</p></div>
-            <div class="portion-size-options">${sizeOptionsHtml}</div>
-            <button class="add-portion-option-btn" data-name="${portionName}" disabled>Adicionar</button>
-        `;
+      <div class="flavor-details"><h4>${portionName}</h4><p>${portionInfo.description}</p></div>
+      <div class="portion-size-options">${sizeOptionsHtml}</div>
+      <button class="add-portion-option-btn" data-name="${portionName}" disabled>Adicionar</button>
+    `;
     portionOptionsContainer.appendChild(optionElement);
   });
   portionModal.classList.add("active");
@@ -386,13 +1024,6 @@ portionOptionsContainer.addEventListener("click", function (event) {
       )} (${selectedSizeInput.getAttribute("data-size")})`;
       const finalPrice = parseFloat(selectedSizeInput.value);
       addToCart(finalName, finalPrice);
-      Toastify({
-        text: "Porção adicionada ao carrinho!",
-        duration: 3000,
-        gravity: "top",
-        position: "right",
-        style: { background: "#22c55e" },
-      }).showToast();
       closePortionModal();
     }
   }
@@ -406,64 +1037,15 @@ portionModal.addEventListener("click", (event) => {
   if (event.target === portionModal) closePortionModal();
 });
 
-// --- Lógica do Modal de Marmitas ---
+// A função openMealModal precisará ser adaptada se você quiser usar a estrutura aLaCarteData
 function openMealModal() {
-  mealModalTitle.textContent = `Escolha sua Marmita do Dia`;
-  mealOptionsContainer.innerHTML = "";
-  meals["Marmita do Dia"].options.forEach((option, index) => {
-    const optionElement = document.createElement("div");
-    optionElement.classList.add("option-item");
-    optionElement.innerHTML = `
-            <input type="radio" id="meal_${index}" name="meal_option" value="${index}" ${
-      index === 0 ? "checked" : ""
-    }>
-            <label for="meal_${index}">
-                <div><span class="option-size">${
-                  option.name
-                }</span><p style="font-size: 0.8rem; color: #666; margin: 4px 0 0 0;">${
-      option.description
-    }</p></div>
-                <span class="option-price">R$ ${option.price.toFixed(2)}</span>
-            </label>
-        `;
-    mealOptionsContainer.appendChild(optionElement);
-  });
-  updateMealModalFooter();
+  mealModalTitle.textContent = `Escolha seu Prato Á La Carte`;
+  mealOptionsContainer.innerHTML =
+    "<p>Esta seção precisa ser adaptada para a nova estrutura de dados 'aLaCarteData'.</p>";
+  // Exemplo de como você poderia começar a adaptar:
+  // Object.keys(aLaCarteData).forEach(category => { ... });
   mealModal.classList.add("active");
 }
-
-mealOptionsContainer.addEventListener("change", updateMealModalFooter);
-
-function updateMealModalFooter() {
-  const selectedOptionInput = mealOptionsContainer.querySelector(
-    'input[name="meal_option"]:checked'
-  );
-  if (selectedOptionInput) {
-    const selectedOption =
-      meals["Marmita do Dia"].options[parseInt(selectedOptionInput.value)];
-    mealItemTotal.textContent = `R$ ${selectedOption.price.toFixed(2)}`;
-  }
-}
-
-addMealToCartBtn.addEventListener("click", function () {
-  const selectedOptionInput = mealOptionsContainer.querySelector(
-    'input[name="meal_option"]:checked'
-  );
-  if (selectedOptionInput) {
-    const selectedOption =
-      meals["Marmita do Dia"].options[parseInt(selectedOptionInput.value)];
-    const finalName = `Marmita (${selectedOption.name})`;
-    addToCart(finalName, selectedOption.price);
-    Toastify({
-      text: "Marmita adicionada ao carrinho!",
-      duration: 3000,
-      gravity: "top",
-      position: "right",
-      style: { background: "#22c55e" },
-    }).showToast();
-    closeMealModal();
-  }
-});
 
 function closeMealModal() {
   mealModal.classList.remove("active");
@@ -473,74 +1055,36 @@ mealModal.addEventListener("click", (event) => {
   if (event.target === mealModal) closeMealModal();
 });
 
-// --- Lógica do Modal de Lanches ---
 function openSandwichModal(type) {
-  sandwichModalTitle.textContent = `Escolha seu Lanche de ${type}`;
+  sandwichModalTitle.textContent = `Escolha seu Lanche`;
   sandwichOptionsContainer.innerHTML = "";
   const options = sandwichesData[type];
-
   options.forEach((option, index) => {
     const optionElement = document.createElement("div");
     optionElement.classList.add("option-item");
     optionElement.innerHTML = `
-            <input type="radio" id="sandwich_${index}" name="sandwich_option" value="${index}" ${
-      index === 0 ? "checked" : ""
-    }>
-            <label for="sandwich_${index}">
-                <div>
-                    <span class="option-size">${option.name}</span>
-                    <p style="font-size: 0.8rem; color: #666; margin: 4px 0 0 0;">${
-                      option.description
-                    }</p>
-                </div>
-                <span class="option-price">R$ ${option.price.toFixed(2)}</span>
-            </label>
-        `;
+      <div class="option-details">
+        <h4>${option.name}</h4>
+        <p>${option.description}</p>
+      </div>
+      <div class="option-price-action">
+        <span>R$ ${option.price.toFixed(2)}</span>
+        <button class="add-sandwich-option-btn" data-name="${
+          option.name
+        }" data-price="${option.price}">Adicionar</button>
+      </div>
+    `;
     sandwichOptionsContainer.appendChild(optionElement);
   });
-
-  updateSandwichModalFooter();
   sandwichModal.classList.add("active");
 }
 
-sandwichOptionsContainer.addEventListener("change", updateSandwichModalFooter);
-
-function updateSandwichModalFooter() {
-  const selectedOptionInput = sandwichOptionsContainer.querySelector(
-    'input[name="sandwich_option"]:checked'
-  );
-  if (selectedOptionInput) {
-    const sandwichType = sandwichModalTitle.textContent.replace(
-      "Escolha seu Lanche de ",
-      ""
-    );
-    const selectedOption =
-      sandwichesData[sandwichType][parseInt(selectedOptionInput.value)];
-    document.getElementById(
-      "sandwich-item-total"
-    ).textContent = `R$ ${selectedOption.price.toFixed(2)}`;
-  }
-}
-
-addSandwichToCartBtn.addEventListener("click", function () {
-  const selectedOptionInput = sandwichOptionsContainer.querySelector(
-    'input[name="sandwich_option"]:checked'
-  );
-  if (selectedOptionInput) {
-    const sandwichType = sandwichModalTitle.textContent.replace(
-      "Escolha seu Lanche de ",
-      ""
-    );
-    const selectedOption =
-      sandwichesData[sandwichType][parseInt(selectedOptionInput.value)];
-    addToCart(selectedOption.name, selectedOption.price);
-    Toastify({
-      text: "Lanche adicionado ao carrinho!",
-      duration: 3000,
-      gravity: "top",
-      position: "right",
-      style: { background: "#22c55e" },
-    }).showToast();
+sandwichOptionsContainer.addEventListener("click", function (event) {
+  const addBtn = event.target.closest(".add-sandwich-option-btn");
+  if (addBtn) {
+    const name = addBtn.getAttribute("data-name");
+    const price = parseFloat(addBtn.getAttribute("data-price"));
+    addToCart(name, price);
     closeSandwichModal();
   }
 });
@@ -553,28 +1097,25 @@ sandwichModal.addEventListener("click", (event) => {
   if (event.target === sandwichModal) closeSandwichModal();
 });
 
-// --- Lógica do Modal de Bebidas ---
 function openDrinkModal(type) {
   currentDrinkType = type;
   drinkModalTitle.textContent = `Escolha seus ${type}`;
   drinkOptionsContainer.innerHTML = "";
   const options = drinksData[type];
-
   options.forEach((option, index) => {
     const optionElement = document.createElement("div");
     optionElement.classList.add("option-item");
     optionElement.innerHTML = `
-            <input type="radio" id="drink_${index}" name="drink_option" value="${index}" ${
+      <input type="radio" id="drink_${index}" name="drink_option" value="${index}" ${
       index === 0 ? "checked" : ""
     }>
-            <label for="drink_${index}">
-                <span class="option-size">${option.name}</span>
-                <span class="option-price">R$ ${option.price.toFixed(2)}</span>
-            </label>
-        `;
+      <label for="drink_${index}">
+        <span class="option-size">${option.name}</span>
+        <span class="option-price">R$ ${option.price.toFixed(2)}</span>
+      </label>
+    `;
     drinkOptionsContainer.appendChild(optionElement);
   });
-
   updateDrinkModalFooter();
   drinkModal.classList.add("active");
 }
@@ -600,13 +1141,6 @@ addDrinkToCartBtn.addEventListener("click", function () {
     const selectedOption =
       drinksData[currentDrinkType][parseInt(selectedOptionInput.value)];
     addToCart(selectedOption.name, selectedOption.price);
-    Toastify({
-      text: "Bebida adicionada ao carrinho!",
-      duration: 3000,
-      gravity: "top",
-      position: "right",
-      style: { background: "#22c55e" },
-    }).showToast();
     closeDrinkModal();
   }
 });
@@ -620,15 +1154,8 @@ drinkModal.addEventListener("click", (event) => {
 });
 
 // ===================================================================
-// LÓGICA DO CARRINHO (CÓDIGO CORRIGIDO)
+// LÓGICA DO CARRINHO (UNIFICADO E CORRIGIDO)
 // ===================================================================
-
-// Garante que o aviso de endereço comece escondido
-document.addEventListener("DOMContentLoaded", (event) => {
-  if (addressWarn) {
-    addressWarn.classList.add("hidden");
-  }
-});
 
 cartBtn.addEventListener("click", function () {
   updateCartModal();
@@ -661,29 +1188,38 @@ function addToCart(name, price) {
   } else {
     cart.push({ name, price, quantity: 1 });
   }
+
+  Toastify({
+    text: "Item adicionado ao carrinho!",
+    duration: 3000,
+    gravity: "top",
+    position: "right",
+    style: {
+      background: "#22c55e",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    },
+    offset: { y: 20 },
+  }).showToast();
+
   updateCartModal();
 }
 
-// LÓGICA ATUALIZADA PARA CSS PURO
 function updateCartModal() {
   cartItemsContainer.innerHTML = "";
   let total = 0;
   cart.forEach((item) => {
     const cartItemElement = document.createElement("div");
-    // Usando uma classe única para o container do item
     cartItemElement.classList.add("cart-item");
-
     cartItemElement.innerHTML = `
-      <div class="cart-item-info">
-        <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-details">Qtd: ${item.quantity}</p>
-        <p class="cart-item-price">R$ ${item.price.toFixed(2)}</p>
-      </div>
-      <button class="remove-from-cart-btn" data-name="${
-        item.name
-      }">Remover</button>
-    `;
-
+      <div class="cart-item-info">
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-details">Qtd: ${item.quantity}</p>
+        <p class="cart-item-price">R$ ${item.price.toFixed(2)}</p>
+      </div>
+      <button class="remove-from-cart-btn" data-name="${
+      item.name
+    }">Remover</button>
+    `;
     total += item.price * item.quantity;
     cartItemsContainer.appendChild(cartItemElement);
   });
@@ -721,26 +1257,56 @@ addressInput.addEventListener("input", function (event) {
   }
 });
 
+// --- NOVA LÓGICA DE OPÇÕES DE ENTREGA ---
+deliveryOptions.forEach((option) => {
+  option.addEventListener("change", function () {
+    if (this.value === "entrega") {
+      addressContainer.classList.remove("hidden");
+    } else {
+      addressContainer.classList.add("hidden");
+      addressInput.value = "";
+      addressWarn.classList.add("hidden");
+      addressInput.classList.remove("input-error");
+    }
+  });
+});
+
+// --- LÓGICA DE FINALIZAÇÃO DO PEDIDO (CHECKOUT) ATUALIZADA ---
 checkoutBtn.addEventListener("click", function () {
   const isOpen = checkRestaurantOpen();
   if (!isOpen) {
     Toastify({
       text: "Desculpe, o restaurante está fechado no momento!",
       duration: 3000,
-      close: true,
       gravity: "top",
       position: "right",
-      stopOnFocus: true,
       style: { background: "#ef4444" },
     }).showToast();
     return;
   }
   if (cart.length === 0) return;
-  if (addressInput.value === "") {
+
+  const deliveryMethod = document.querySelector(
+    'input[name="delivery-method"]:checked'
+  );
+
+  if (!deliveryMethod) {
+    Toastify({
+      text: "Por favor, escolha Entrega ou Retirada.",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: { background: "#ef4444" },
+    }).showToast();
+    return;
+  }
+
+  if (deliveryMethod.value === "entrega" && addressInput.value.trim() === "") {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("input-error");
     return;
   }
+
   const obsValue = addressObs.value.trim()
     ? `\n*Observação:* ${addressObs.value}`
     : "";
@@ -756,29 +1322,60 @@ checkoutBtn.addEventListener("click", function () {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const message = `*== NOVO PEDIDO ==*\n\nOlá, gostaria de fazer o seguinte pedido:\n\n${cartItems}\n\n*Endereço de entrega:*\n${
-    addressInput.value
-  }${obsValue}\n\n*Total: R$ ${totalPedido.toFixed(2)}*`;
 
-  // NÚMERO DE WHATSAPP CORRIGIDO
-  const phone = "67992347962";
+  let deliveryInfo = "";
+  if (deliveryMethod.value === "entrega") {
+    deliveryInfo = `*Endereço de entrega:*\n${addressInput.value}`;
+  } else {
+    deliveryInfo = `*Método de Entrega:*\nRetirar no balcão`;
+  }
 
+  const message = `*== NOVO PEDIDO ==*\n\nOlá, gostaria de fazer o seguinte pedido:\n\n${cartItems}\n\n${deliveryInfo}${obsValue}\n\n*Total: R$ ${totalPedido.toFixed(
+    2
+  )}*`;
+
+  const phone = "67999358598"; // Telefone do cardápio
   const encodedMessage = encodeURIComponent(message);
   window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
 
   cart = [];
   addressInput.value = "";
   addressObs.value = "";
+  if (deliveryMethod) {
+    deliveryMethod.checked = false;
+  }
+  addressContainer.classList.add("hidden");
   updateCartModal();
 });
 
 // ===================================================================
-// FUNÇÕES DE VERIFICAÇÃO E CARROSSEL
+// FUNÇÕES DE VERIFICAÇÃO E OUTROS
 // ===================================================================
 function checkRestaurantOpen() {
-  const data = new Date();
-  const hora = data.getHours();
-  return hora >= 18 && hora < 23;
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // Domingo = 0, Segunda = 1, ...
+
+  // Horários do cardápio (aproximado, pois não especifica dias)
+  const openAlmoco = { h: 11, m: 0 }; // 11:00
+  const closeAlmoco = { h: 15, m: 0 }; // 15:00
+  const openJantar = { h: 18, m: 0 }; // 18:00
+  const closeJantar = { h: 23, m: 45 }; // 23:45
+
+  const currentTimeInMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const openAlmocoMin = openAlmoco.h * 60 + openAlmoco.m;
+  const closeAlmocoMin = closeAlmoco.h * 60 + closeAlmoco.m;
+  const openJantarMin = openJantar.h * 60 + openJantar.m;
+  const closeJantarMin = closeJantar.h * 60 + closeJantar.m;
+
+  const isAlmocoOpen =
+    currentTimeInMinutes >= openAlmocoMin &&
+    currentTimeInMinutes < closeAlmocoMin;
+  const isJantarOpen =
+    currentTimeInMinutes >= openJantarMin &&
+    currentTimeInMinutes < closeJantarMin;
+
+  return isAlmocoOpen || isJantarOpen;
 }
 
 const spanItem = document.getElementById("data-span");
@@ -832,92 +1429,46 @@ if (carousel) {
   }
 }
 
-// ===================================================================
-// ANIMAÇÃO AO ROLAR A PÁGINA (SEÇÃO SOBRE)
-// ===================================================================
+// --- Animação de Scroll ---
 const elementosParaAnimar = document.querySelectorAll(".sobre__restaurante");
-
-// A função que será chamada quando um elemento entrar na tela
 const callback = (entries) => {
   entries.forEach((entry) => {
-    // Se o elemento estiver visível (intersecting)
     if (entry.isIntersecting) {
-      // Adiciona a classe .visible para ativar a animação CSS
       entry.target.classList.add("visible");
     }
   });
 };
-
-// Cria o "observador" que vai monitorar os elementos
-const observer = new IntersectionObserver(callback, {
-  threshold: 0.2, // A animação começa quando 20% do elemento estiver visível
-});
-
-// Diz ao observador para monitorar cada um dos nossos elementos
+const observer = new IntersectionObserver(callback, { threshold: 0.2 });
 elementosParaAnimar.forEach((element) => {
   observer.observe(element);
 });
 
-// Localize esta função no seu scriptIndex.js
-function addToCart(name, price) {
-  const existingItem = cart.find((item) => item.name === name);
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({ name, price, quantity: 1 });
-  }
+// --- Lógica do Menu Hambúrguer ---
+const hamburgerButton = document.getElementById("hamburger-button");
+const mobileMenu = document.getElementById("mobile-menu");
+const closeButton = document.getElementById("close-button");
+const mobileMenuLinks = document.querySelectorAll("#mobile-menu a");
 
-  // ATUALIZAÇÃO: Adicione a notificação Toastify aqui
-  Toastify({
-    text: "Item adicionado ao carrinho!",
-    duration: 3000,
-    gravity: "top",
-    position: "right",
-    style: {
-      background: "#22c55e", // Verde para sucesso
-      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-    },
-    offset: {
-      y: 20, // Um pequeno espaço do topo
-    },
-  }).showToast();
-
-  // O resto da função continua igual
-  updateCartModal();
+function openMenu() {
+  hamburgerButton.classList.add("active");
+  mobileMenu.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
 
-function toggleMenu() {
-  const hamburger = document.querySelector(".hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  hamburger.classList.toggle("active");
-  mobileMenu.classList.toggle("active");
-
-  if (mobileMenu.classList.contains("active")) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+function closeMenu() {
+  hamburgerButton.classList.remove("active");
+  mobileMenu.classList.remove("active");
+  document.body.style.overflow = "auto";
 }
 
-document.addEventListener("click", function (event) {
-  const hamburger = document.querySelector(".hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
-    hamburger.classList.remove("active");
-    mobileMenu.classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
+hamburgerButton.addEventListener("click", openMenu);
+closeButton.addEventListener("click", closeMenu);
+mobileMenuLinks.forEach((link) => {
+  link.addEventListener("click", closeMenu);
 });
 
 window.addEventListener("resize", function () {
   if (window.innerWidth > 768) {
-    const hamburger = document.querySelector(".hamburger");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    hamburger.classList.remove("active");
-    mobileMenu.classList.remove("active");
-    document.body.style.overflow = "auto";
+    closeMenu();
   }
 });
